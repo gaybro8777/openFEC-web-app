@@ -45,14 +45,18 @@ The app has HTTP auth enabled. You will need to set environment variables with y
 Those vars are `FEC_WEB_USERNAME` and `FEC_WEB_PASSWORD`. There are other config environment variables that you
 can set, but that have defaults. You can see those in `openfecwebapp/config.py`.
 
-### Run server
-To make the site fully functional, you will need to compile the client side JS and CSS:
+#### Required environmental variables
+To start developing locally, set the following environmental variables:
 
-    $ npm run build
+First, set `FEC_WEB_API_URL` to the URL of the API. You may serve the API locally, or to use the production API use:
 
-Then start the server:
+    $ export FEC_WEB_API_URL=https://api.open.fec.gov
 
-    $ python __init__.py
+If you're using the production API, enter your API Key (get one [via data.gov](https://api.data.gov/signup/)):
+
+    $ export FEC_WEB_API_KEY=yourkey
+
+#### Optional environmental variables
 
 To run the server in debug mode set:
 
@@ -65,6 +69,21 @@ To use styles served from a custom location (e.g., if developing against a local
 To be able to have links between this app and a local installation of the cms:
 
     $ export FEC_CMS_URL=http://localhost:8000
+
+To avoid repeated requests to the OpenFEC API, the webapp can store recent API responses
+in a small in-memory cache. The cache can be enabled by setting the `FEC_WEB_CACHE`
+environment variable; the size of the cache, in items, is controlled by the
+`FEC_WEB_CACHE_SIZE` environment variable. When the cache is enabled, views may
+be stale for up to the cache duration set by the API.
+
+### Running the site locally
+To make the site fully functional, you will need to compile the client side JavaScript and Sass:
+
+    $ npm run build
+
+And then start the server:
+
+    $ python __init__.py
     
 If you'd like the app to cache API requests it makes, use the `--cached` flag:
 
@@ -90,14 +109,6 @@ Compile Sass as changes are made:
 ### Deployment
 
 See directions in the 18F/openFEC repo.
-
-#### Caching
-
-To avoid repeated requests to the OpenFEC API, the webapp can store recent API responses
-in a small in-memory cache. The cache can be enabled by setting the `FEC_WEB_CACHE`
-environment variable; the size of the cache, in items, is controlled by the
-`FEC_WEB_CACHE_SIZE` environment variable. When the cache is enabled, views may
-be stale for up to the cache duration set by the API.
 
 ### Run Tests
 #### Unit Tests
