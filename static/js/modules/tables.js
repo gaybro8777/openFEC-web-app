@@ -476,7 +476,7 @@ DataTable.prototype.ensureWidgets = function() {
   }
 
   if (this.opts.useExport) {
-    this.$exportWidget = $('<div class="button button--primary-contrast results-info__download">Export this data</div>');
+    this.$exportWidget = $('<button type="button" class="button button--primary-contrast results-info__download">Export this data</button>');
     this.$exportWidget.on('click', this.export.bind(this));
     $paging.prepend(this.$exportWidget);
   }
