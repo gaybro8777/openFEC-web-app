@@ -81,7 +81,7 @@
     "raven-js": "1.2.0",
     "topojson": "1.6.19",
     "underscore": "1.8.3",
-    "underscore.string": "3.2.0",
+    "underscore.string": "3.3.5",
     "urijs": "1.16.1",
     "watchify": "3.2.1"
   },
